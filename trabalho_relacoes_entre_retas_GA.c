@@ -12,9 +12,8 @@ int retasReversas(int *vetorDiretor1, int *vetorDiretor2, int *vetorDiretor12);
 
 void recebeDados(){
 
-    //recebe as coordenas do ponto em que a reta 1 passa ponto1(X1,Y1,Z1)
     printf("Uma reta deve passar por um ponto A(x,y,z) e deve possuir um vetor diretor(a,b,c).\n");
-
+    //recebe as coordenas do ponto em que a reta 1 passa ponto1(X1,Y1,Z1)
     printf("\nDigite a coordenada em X do ponto em que a reta 1 passa.\n");
     scanf("%d", &ponto1[0]);
     printf("Digite a coordenada em Y do ponto em que a reta 1 passa.\n");
@@ -52,7 +51,7 @@ void recebeDados(){
 }
 
 void mostraDados(){
-// fun��o que mostra os pontos e vetores diretores digitados pelo usu�rio
+// funcao que mostra os pontos e vetores diretores digitados pelo usuario
 int i = 0;
 int contador = 0;
 
@@ -99,7 +98,7 @@ int contador = 0;
 }
 
 int retasReversas(int *vetorDiretor1, int *vetorDiretor2, int *vetorDiretor12){
-// fazendo o determinante entre os vetores diretores � possivel determinar se as retas s�o reversas ou n�o.
+// fazendo o determinante entre os vetores diretores eh possivel determinar se as retas sao reversas ou nao.
 int determinante = 0;
 determinante+= (vetorDiretor1[0] * vetorDiretor2[1] * vetorDiretor12[2]);
 determinante+= (vetorDiretor1[1] * vetorDiretor2[2] * vetorDiretor12[0]);
@@ -109,9 +108,9 @@ determinante+= (vetorDiretor1[0] * vetorDiretor2[2] * vetorDiretor12[1])*-1;
 determinante+= (vetorDiretor1[1] * vetorDiretor2[0] * vetorDiretor12[2])*-1;
 
     //printf("\nO determinante eh: %d \n", determinante);
-// se o determinante der 0 os vetores diretores s�o coplanares e portanto as retas n�o s�o reversas
+// se o determinante der 0 os vetores diretores s�o coplanares e portanto as retas nao sao reversas
     if(determinante == 0) return 0;
-// se o determinante der diferente de 0 os vetores diretores n�o s�o coplanares e portanto as retas s�o reversas
+// se o determinante der diferente de 0 os vetores diretores n�o s�o coplanares e portanto as retas sao reversas
     else return 1;
 }
 
@@ -125,7 +124,7 @@ int vetorTeste3[3] = {0,-1,1};
     //recebeDados();
     //mostraDados();
 
-// testa se as retas s�o reversas:
+// testa se as retas sao reversas:
     if(retasReversas(vetorTeste1, vetorTeste2, vetorTeste3))
         printf("\nAs retas sao reversas\n");
     }
@@ -136,4 +135,3 @@ int vetorTeste3[3] = {0,-1,1};
 
 return 0;
 }
-
