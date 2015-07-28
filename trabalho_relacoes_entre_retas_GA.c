@@ -108,9 +108,9 @@ determinante+= (vetorDiretor1[0] * vetorDiretor2[2] * vetorDiretor12[1])*-1;
 determinante+= (vetorDiretor1[1] * vetorDiretor2[0] * vetorDiretor12[2])*-1;
 
     //printf("\nO determinante eh: %d \n", determinante);
-// se o determinante der 0 os vetores diretores s�o coplanares e portanto as retas nao sao reversas
+// se o determinante der 0 os vetores diretores sao coplanares e portanto as retas nao sao reversas
     if(determinante == 0) return 0;
-// se o determinante der diferente de 0 os vetores diretores n�o s�o coplanares e portanto as retas sao reversas
+// se o determinante der diferente de 0 os vetores diretores nao sao coplanares e portanto as retas sao reversas
     else return 1;
 }
 
