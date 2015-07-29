@@ -9,6 +9,8 @@ int vetorDiretor12[3];
 void recebeDados();
 void mostraDados();
 int retasReversas(int *vetorDiretor1, int *vetorDiretor2, int *vetorDiretor12);
+int retasOrtogonais(int *vetorDiretor1, int *vetorDiretor2);
+int retasParalelas(int *vetorDiretor1, int *vetorDiretor2);
 
 void recebeDados(){
 
@@ -114,24 +116,58 @@ determinante+= (vetorDiretor1[1] * vetorDiretor2[0] * vetorDiretor12[2])*-1;
     else return 1;
 }
 
+int retasOrtogonais(int *vetorDiretor1, int *vetorDiretor2){
+
+int resultado = 0, i = 0;
+    // se o produto vetorial entre os vetores diretores for 0, as retas sao ortogonais.
+    for(i = 0; i < 3; i++){
+        resultado+= vetorDiretor1[i] * vetorDiretor2[i];
+    }
+    if(resultado == 0) return 1;
+    else return 0;
+}
+
+int retasParalelas(int *vetorDiretor1, int *vetorDiretor2){
+
+int k[3], i = 0;
+    // se existir um K que seja possivel escrever vetorDiretor1 = k*vetorDiretor2, entao as retas sao paralelas
+    for(i = 0; i < 3; i++){
+        k[i] = vetorDiretor1[i] / vetorDiretor2[i];
+    }
+    if(k[0] == k[1] && k[1] == k[2]) return 1;
+    else return 0;
+}
 
 int main(){
 
-int vetorTeste1[3] = {1,-3,3};
-int vetorTeste2[3] = {1,2,-2};
+int vetorTeste1[3] = {8,0,-6};
+int vetorTeste2[3] = {3,5,4};
 int vetorTeste3[3] = {0,-1,1};
 
     //recebeDados();
     //mostraDados();
 
 // testa se as retas sao reversas:
-    if(retasReversas(vetorTeste1, vetorTeste2, vetorTeste3))
+    if(retasReversas(vetorTeste1, vetorTeste2, vetorTeste3)){
         printf("\nAs retas sao reversas\n");
     }
     else{
         printf("\nAs retas nao sao reversas\n");
     }
 
+    if(retasOrtogonais(vetorTeste1, vetorTeste2)){
+        printf("\nAs retas sao ortogonais\n");
+    }
+    else{
+        printf("\nAs retas nao sao ortogonais\n");
+    }
 
-return 0;
+    if(retasParalelas(vetorTeste1, vetorTeste2)){
+        printf("\nAs retas sao paralelas\n");
+    }
+    else{
+        printf("\nAs retas nao sao paralelas\n");
+    }
+
+    return 0;
 }
