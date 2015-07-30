@@ -11,6 +11,7 @@ void mostraDados();
 int retasReversas(int *vetorDiretor1, int *vetorDiretor2, int *vetorDiretor12);
 int retasOrtogonais(int *vetorDiretor1, int *vetorDiretor2);
 int retasParalelas(int *vetorDiretor1, int *vetorDiretor2);
+int retasCoincidentes(int *ponto2, int *vetorDiretor1, int *ponto1);
 
 void recebeDados(){
 
@@ -129,19 +130,65 @@ int resultado = 0, i = 0;
 
 int retasParalelas(int *vetorDiretor1, int *vetorDiretor2){
 
+int erro[3] = {4,4,4};
+int qualErro[3];
 int k[3], i = 0;
+
     // se existir um K que seja possivel escrever vetorDiretor1 = k*vetorDiretor2, entao as retas sao paralelas
     for(i = 0; i < 3; i++){
-        k[i] = vetorDiretor1[i] / vetorDiretor2[i];
+        // testa se as coordenadas são 0
+        if(vetorDiretor1[i] == 0 && vetorDiretor2[i] == 0){
+            erro[i] = 1;
+        }else
+        {
+            k[i] = vetorDiretor1[i] / vetorDiretor2[i];
+        }
     }
+    // caso haja duas coordernadas com 0 na mesma posição, o programa "pula" essas coordenadas
+    if(erro[0] == 1){
+        k[0] = k[1];
+        if(erro[1] == 1){
+            k[0] = k[2];
+            k[1] = k[2];
+        }
+        else if(erro[2] == 1){
+            k[0] = k[1];
+            k[2] = k[1];
+        }
+    }
+    else if(erro[1] == 1){
+        k[1] = k[0];
+        if(k[2] = 1){
+            k[2] = k[0];
+        }
+    }else if(erro[2] == 1){
+        k[2] = k[1];
+    }
+
     if(k[0] == k[1] && k[1] == k[2]) return 1;
     else return 0;
 }
 
+int retasCoincidentes(int *ponto1, int *vetorDiretor1, int *ponto2){
+
+int lambda[3] = {0,0,0};
+int i = 0;
+    // testa se as retas sao as mesmas retas, para isso eh necessario testar o ponto de uma na outra,
+    // caso o lambda seja o mesmo para todas as coordenadas, entao sao as mesmas retas
+    for(i = 0; i < 3; i++){
+        lambda[i] = (ponto2[i] + (-ponto1[i])) / vetorDiretor1[i];
+    }
+    if(lambda[0] == lambda[1] && lambda[0] == lambda[2])    return 1;
+    else    return 0;
+
+}
+
 int main(){
 
-int vetorTeste1[3] = {8,0,-6};
-int vetorTeste2[3] = {3,5,4};
+int vetorTeste1[3] = {7,3,13};
+int vetorTeste2[3] = {8,3,-2};
+int pontoTeste1[3] = {0,1,0};
+int pontoTeste2[3] = {2,0,1};
 int vetorTeste3[3] = {0,-1,1};
 
     //recebeDados();
@@ -150,24 +197,44 @@ int vetorTeste3[3] = {0,-1,1};
 // testa se as retas sao reversas:
     if(retasReversas(vetorTeste1, vetorTeste2, vetorTeste3)){
         printf("\nAs retas sao reversas\n");
+
+        // caso sejam reversas, testa se alem de reversas, sao ortogonais
+        if(retasOrtogonais(vetorTeste1, vetorTeste2)){
+            printf("\nAs retas sao ortogonais\n");
+        }
+        else{
+            printf("\nAs retas nao sao ortogonais\n");
+        }
     }
     else{
         printf("\nAs retas nao sao reversas\n");
-    }
 
-    if(retasOrtogonais(vetorTeste1, vetorTeste2)){
-        printf("\nAs retas sao ortogonais\n");
-    }
-    else{
-        printf("\nAs retas nao sao ortogonais\n");
-    }
+        // se elas nao forem reversas, testa se sao paralelas
+        if(retasParalelas(vetorTeste1, vetorTeste2)){
+            printf("\nAs retas sao paralelas\n");
 
-    if(retasParalelas(vetorTeste1, vetorTeste2)){
-        printf("\nAs retas sao paralelas\n");
-    }
-    else{
-        printf("\nAs retas nao sao paralelas\n");
-    }
+            // se elas forem paralelas, testa se alem de paralelas, sao as mesmas retas
+            if(retasCoincidentes(pontoTeste1,vetorTeste1,pontoTeste2)){
+                printf("\nEstas sao retas coincidentes\n");
+            }
+            else{
+                printf("\nNao sao as mesmas retas\n");
+            }
+        }
+        else{
+            printf("\nAs retas nao sao paralelas\n");
 
+            //caso elas nao sejam reversas nem paralelas, elas sao retas concorrentes
+            printf("\nAs retas sao concorrentes\n");
+
+            // testa se alem de concorrentes, elas sao ortogonais
+            if(retasOrtogonais(vetorTeste1, vetorTeste2)){
+                printf("\nAs retas sao ortogonais\n");
+            }
+            else{
+                printf("\nAs retas nao sao ortogonais\n");
+            }
+        }
+    }
     return 0;
 }
