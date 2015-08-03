@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int vetorDiretor1[3];
 int vetorDiretor2[3];
@@ -10,7 +11,7 @@ int pontoInter[3];
 void recebeDados();
 void mostraDados();
 void menu();
-void verificaRetas(int *vetorDiretor1, int *vetorDiretor2, int vetorDiretor12, int *ponto1, int *ponto2);
+void verificaRetas(int *vetorDiretor1, int *vetorDiretor2, int *vetorDiretor12, int *ponto1, int *ponto2);
 int retasReversas(int *vetorDiretor1, int *vetorDiretor2, int *vetorDiretor12);
 int retasOrtogonais(int *vetorDiretor1, int *vetorDiretor2);
 int retasParalelas(int *vetorDiretor1, int *vetorDiretor2);
@@ -319,7 +320,7 @@ int escolha = 0;
     }
 }
 
-void verificaRetas(int *vetorDiretor1, int *vetorDiretor2, int vetorDiretor12, int *ponto1, int *ponto2){
+void verificaRetas(int *vetorDiretor1, int *vetorDiretor2, int *vetorDiretor12, int *ponto1, int *ponto2){
 
 int vetorTeste1[3] = {0,-1,1};
 int vetorTeste2[3] = {0,2,-2};
