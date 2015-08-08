@@ -22,21 +22,13 @@ void recebeDados(){
 
     system("cls");
     printf("Um reta passa por um ponto A(x,y,z) e possui um vetor diretor(a,b,c).\n");
-    //recebe as coordenas do ponto em que a reta 1 passa ponto1(X1,Y1,Z1)
+    //recebe as coordenas do ponto em que a reta 1 passa ponto 1(X1,Y1,Z1)
     printf("\nDigite a coordenada em X do ponto em que a reta 1 passa.\n");
     scanf("%f", &ponto1[0]);
     printf("Digite a coordenada em Y do ponto em que a reta 1 passa.\n");
     scanf("%f", &ponto1[1]);
     printf("Digite a coordenada em Z do ponto em que a reta 1 passa.\n");
     scanf("%f", &ponto1[2]);
-
-    //recebe as coordenas do ponto em que a reta 1 passa ponto2(X2,Y2,Z2)
-    printf("\nDigite a coordenada em X do ponto em que a reta 2 passa.\n");
-    scanf("%f", &ponto2[0]);
-    printf("Digite a coordenada em Y do ponto em que a reta 2 passa.\n");
-    scanf("%f", &ponto2[1]);
-    printf("Digite a coordenada em Z do ponto em que a reta 2 passa.\n");
-    scanf("%f", &ponto2[2]);
 
     //recebe as coordenas do vetor diretor da reta 1(a1,b1,c1)
     printf("\nDigite a coordenada em X do vetor diretor da reta1.\n");
@@ -45,6 +37,14 @@ void recebeDados(){
     scanf("%f", &vetorDiretor1[1]);
     printf("Digite a coordenada em Z do vetor diretor da reta1.\n");
     scanf("%f", &vetorDiretor1[2]);
+    
+        //recebe as coordenas do ponto em que a reta 2 passa ponto 2(X2,Y2,Z2)
+    printf("\nDigite a coordenada em X do ponto em que a reta 2 passa.\n");
+    scanf("%f", &ponto2[0]);
+    printf("Digite a coordenada em Y do ponto em que a reta 2 passa.\n");
+    scanf("%f", &ponto2[1]);
+    printf("Digite a coordenada em Z do ponto em que a reta 2 passa.\n");
+    scanf("%f", &ponto2[2]);
 
     //recebe as coordenas do vetor diretor da reta 2(a2,b2,c2)
     printf("\nDigite a coordenada em X do vetor diretor da reta2.\n");
@@ -133,7 +133,7 @@ int retasOrtogonais(float *vetorDiretor1, float *vetorDiretor2){
 
 float resultado = 0;
 int i = 0;
-    // se o produto vetorial entre os vetores diretores for 0, as retas sao ortogonais.
+    // se o produto escalar entre os vetores diretores for 0, as retas sao ortogonais.
     for(i = 0; i < 3; i++){
         resultado+= vetorDiretor1[i] * vetorDiretor2[i];
     }
@@ -154,16 +154,16 @@ int i = 0;
             erro[i] = 1;
         }
         else if(vetorDiretor1[i] == 0.0){
-            k[i] == 158;
+            k[i] = 158;
         }
         else if(vetorDiretor2[i] == 0.0){
-            k[i] == 159;
+            k[i] = 159;
         }
         else{
             k[i] = vetorDiretor1[i] / vetorDiretor2[i];
         }
     }
-    // caso haja duas coordernadas com 0 na mesma posição, o programa "pula" essas coordenadas
+    // caso haja duas coordernadas com 0 na mesma posiÃ§Ã£o, o programa "pula" essas coordenadas
     if(erro[0] == 1){
         k[0] = k[1];
         if(erro[1] == 1){
@@ -177,7 +177,7 @@ int i = 0;
     }
     else if(erro[1] == 1){
         k[1] = k[0];
-        if(k[2] = 1){
+        if(k[2] == 1){
             k[2] = k[0];
         }
     }else if(erro[2] == 1){
@@ -458,13 +458,6 @@ float vetorTeste3[3] = {0,-5,5};
 
 int main(){
 
-//float v1[3] = {0,3,5};
-//float v2[3] = {2,-2,6};
-//float p1[3] = {2,3,6};
-//float p2[3] = {1,4,3};
-
-    //pontoIntersecao(v1,v2,p1,p2);
-    //printf("%.1f %.1f %.1f", pontoInter[0], pontoInter[1], pontoInter[2]);
     menu();
     return 0;
 }
